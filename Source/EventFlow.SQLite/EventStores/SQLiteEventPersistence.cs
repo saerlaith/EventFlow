@@ -23,7 +23,7 @@
 
 using System;
 using System.Collections.Generic;
-using System.Data.SQLite;
+using Microsoft.Data.Sqlite;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -142,9 +142,9 @@ namespace EventFlow.SQLite.EventStores
                     eventDataModels)
                     .ConfigureAwait(false);
             }
-            catch (SQLiteException e)
+            catch (SqliteException e)
             {
-                if (e.ResultCode == SQLiteErrorCode.Constraint)
+                if (e.SqliteErrorCode == 19)
                 {
                     throw new OptimisticConcurrencyException(e.ToString(), e);
                 }

@@ -21,9 +21,11 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-using System.Data;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.Data;
+using Microsoft.Data.Sqlite;
+using System.Data;
 
 namespace EventFlow.SQLite.Connections
 {
@@ -31,7 +33,7 @@ namespace EventFlow.SQLite.Connections
     {
         public async Task<IDbConnection> OpenConnectionAsync(string connectionString, CancellationToken cancellationToken)
         {
-            var sqLiteConnection = new System.Data.SQLite.SQLiteConnection(connectionString);
+            var sqLiteConnection = new SqliteConnection(connectionString);
             await sqLiteConnection.OpenAsync(cancellationToken).ConfigureAwait(false);
             return sqLiteConnection;
         }
